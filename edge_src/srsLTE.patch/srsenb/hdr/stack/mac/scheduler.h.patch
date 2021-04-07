@@ -1,0 +1,48 @@
+--- srsLTE/srsenb/hdr/stack/mac/scheduler.h	2021-03-25 21:20:59.988589480 +1100
++++ srsLTE_modified/srsenb/hdr/stack/mac/scheduler.h	2021-03-22 16:20:01.264532000 +1100
+@@ -32,6 +32,11 @@
+ #include <mutex>
+ #include <pthread.h>
+ 
++#ifdef ENABLE_DDRL
++#include "srs_ext.h"
++#include "ops_async_agent.h"
++#include "ops_scheduler.h"
++#endif
+ namespace srsenb {
+ 
+ 
+@@ -43,9 +48,23 @@ namespace srsenb {
+  */
+ 
+ class sched : public sched_interface
++#ifdef ENABLE_DDRL
++, public mac_interface_ext
++, public ops_async_agent
++#endif
+ {
+ public:
+-  // handle for DL metric
++
++#ifdef ENABLE_DDRL
++	int set_qci(uint16_t rnti, uint8_t lc_id, uint8_t qci);
++	int set_head_of_line(uint16_t rnti, uint8_t lc_id, long hol);
++	int set_head_timestamp(uint16_t rnti, uint8_t lc_id, struct timeval hts);
++	
++	int do_scheduling();
++	ops::ops_input get_ops_input();
++    ops::ops_cell_conf get_cell_config();
++#endif
++	// handle for DL metric
+   class dl_tti_sched_t
+   {
+   public:
+@@ -153,6 +172,8 @@ public:
+   static uint32_t aggr_level(uint32_t aggr_idx) { return 1u << aggr_idx; }
+ 
+ protected:
++#ifdef ENABLE_DDRL
++#endif
+   metric_dl *dl_metric;
+   metric_ul *ul_metric; 
+   srslte::log *log_h; 

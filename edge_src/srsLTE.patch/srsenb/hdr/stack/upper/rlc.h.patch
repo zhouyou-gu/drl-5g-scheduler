@@ -1,0 +1,36 @@
+--- srsLTE/srsenb/hdr/stack/upper/rlc.h	2021-03-25 21:20:59.988589480 +1100
++++ srsLTE_modified/srsenb/hdr/stack/upper/rlc.h	2021-03-22 16:20:01.260532000 +1100
+@@ -23,6 +23,9 @@
+ #include "srslte/interfaces/ue_interfaces.h"
+ #include "srslte/interfaces/enb_interfaces.h"
+ #include "srslte/upper/rlc.h"
++#ifdef ENABLE_DDRL
++#include "srs_ext.h"
++#endif
+ 
+ #ifndef SRSENB_RLC_H
+ #define SRSENB_RLC_H
+@@ -39,6 +42,9 @@ namespace srsenb {
+ class rlc :  public rlc_interface_mac, 
+              public rlc_interface_rrc, 
+              public rlc_interface_pdcp
++#ifdef ENABLE_DDRL
++, public rlc_layer_ext
++#endif
+ {
+ public:
+  
+@@ -64,6 +70,13 @@ public:
+   void write_pdu(uint16_t rnti, uint32_t lcid, uint8_t *payload, uint32_t nof_bytes);
+   void read_pdu_pcch(uint8_t *payload, uint32_t buffer_size); 
+   
++protected:
++#ifdef ENABLE_DDRL
++		int do_ext_report(uint16_t rnti, uint8_t lc_id);
++		int report_head_of_line(uint16_t rnti, uint8_t lc_id); // run get hol then run set inside
++		int report_head_timestamp(uint16_t rnti, uint8_t lc_id); // report -1 sec -1 usec if not packets
++#endif
++
+ private:
+   class user_interface : public srsue::pdcp_interface_rlc, public srsue::rrc_interface_rlc
+   {

@@ -1,0 +1,35 @@
+--- srsLTE/srsenb/hdr/stack/mac/scheduler_ue.h	2021-03-25 21:20:59.988589480 +1100
++++ srsLTE_modified/srsenb/hdr/stack/mac/scheduler_ue.h	2021-03-22 16:20:01.260532000 +1100
+@@ -29,7 +29,10 @@
+ #include "scheduler_harq.h"
+ #include "srslte/asn1/rrc_asn1.h"
+ #include <mutex>
+-
++#ifdef ENABLE_DDRL
++#include "srs_ext.h"
++#include "ops_agent.h"
++#endif
+ namespace srsenb {
+ 
+ 
+@@ -38,9 +41,19 @@ namespace srsenb {
+  *
+  * 1 mutex is created for every user and only access to same user variables are mutexed
+  */
+-class sched_ue {
++class sched_ue
++#ifdef ENABLE_DDRL
++: public sched_ue_ext
++	, public ops_agent_ue
++#endif
++	{
+ 
+ public:
++#ifdef ENABLE_DDRL
++	uint32_t get_dl_lc_buffer_size(uint8_t lc_id);
++	ops::ops_ue_input * get_ops_ue_input();
++#endif
++	
+   // used by sched_metric to store the pdsch/pusch allocations
+   bool has_pucch;
+   

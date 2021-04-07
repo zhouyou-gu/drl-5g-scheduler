@@ -1,0 +1,22 @@
+--- srsLTE/srsenb/src/phy/prach_worker.cc	2021-03-25 21:20:59.988589480 +1100
++++ srsLTE_modified/srsenb/src/phy/prach_worker.cc	2021-03-22 16:20:01.256532000 +1100
+@@ -124,14 +124,17 @@ int prach_worker::run_tti(sf_buffer *b)
+       log_h->error("Error detecting PRACH\n");
+       return SRSLTE_ERROR; 
+     }
++  
++    log_h->debug("prach_nof_det=%d, nof_sf=%d\n",prach_nof_det,nof_sf);
+     
+     if (prach_nof_det) {
+       for (uint32_t i=0;i<prach_nof_det;i++) {
+-        log_h->info("PRACH: %d/%d, preamble=%d, offset=%.1f us, peak2avg=%.1f, max_offset=%.1f us\n", 
++        log_h->info("PRACH: %d/%d, preamble=%d, offset=%.1f us, peak2avg=%.1f, max_offset=%.1f us\n",
+             i, prach_nof_det, prach_indices[i], prach_offsets[i]*1e6, prach_p2avg[i], max_prach_offset_us);
+         
+         if (prach_offsets[i]*1e6 < max_prach_offset_us) {
+-          stack->rach_detected(b->tti, prach_indices[i], (uint32_t)(prach_offsets[i] * 1e6));
++		    uint32_t ta =(uint32_t) (prach_offsets[i]/16/SRSLTE_LTE_TS);
++            stack->rach_detected(b->tti, prach_indices[i], ta);
+         }
+       }
+     }

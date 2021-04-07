@@ -1,0 +1,23 @@
+--- srsLTE/lib/include/srslte/upper/rlc_common.h	2021-03-25 21:20:59.932588950 +1100
++++ srsLTE_modified/lib/include/srslte/upper/rlc_common.h	2021-03-22 16:20:01.280532000 +1100
+@@ -24,7 +24,9 @@
+ 
+ #include "srslte/common/block_queue.h"
+ #include <stdlib.h>
+-
++#ifdef ENABLE_DDRL
++#include "srs_ext.h"
++#endif
+ namespace srslte {
+ 
+ /****************************************************************************
+@@ -137,6 +139,9 @@ struct rlc_status_pdu_t{
+  * Common interface for all RLC entities
+  ***************************************************************************/
+ class rlc_common
++#ifdef ENABLE_DDRL
++: public rlc_common_ext
++#endif
+ {
+ public:
+ 

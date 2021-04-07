@@ -1,0 +1,26 @@
+//
+// Created on 20/9/19.
+// Author: Zhouyou Gu <guzhouyou@gmail.com>.
+//
+
+
+syntax = "proto3";
+package ddrl;
+import "nn_config.proto";
+
+
+message model_weight{
+    uint32 tensor_index = 1;
+    uint32 n_dim = 2;
+    uint32 x_index = 3;
+    uint32 y_index = 4;
+    float tau = 5;
+    float value  =  6;
+}
+
+message update_model_weight{
+    string name = 1;
+    ddrl.nn_config nn_config= 2;
+    uint32 n_tensor_in_model = 3;
+    repeated model_weight weight= 4;
+}

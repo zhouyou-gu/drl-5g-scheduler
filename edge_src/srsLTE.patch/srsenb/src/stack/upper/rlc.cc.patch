@@ -1,0 +1,54 @@
+--- srsLTE/srsenb/src/stack/upper/rlc.cc	2021-03-25 21:20:59.992589519 +1100
++++ srsLTE_modified/srsenb/src/stack/upper/rlc.cc	2021-03-22 16:20:01.244532000 +1100
+@@ -82,7 +82,10 @@ void rlc::clear_buffer(uint16_t rnti)
+   if (users.count(rnti)) {
+     users[rnti].rlc->empty_queue();
+     for (int i=0;i<SRSLTE_N_RADIO_BEARERS;i++) {
+-      mac->rlc_buffer_state(rnti, i, 0, 0);      
++      mac->rlc_buffer_state(rnti, i, 0, 0);
++#ifdef ENABLE_DDRL
++      do_ext_report(rnti,i);
++#endif
+     }
+     log_h->info("Cleared buffer rnti=0x%x\n", rnti);
+   }
+@@ -132,6 +135,9 @@ int rlc::read_pdu(uint16_t rnti, uint32_
+     uint32_t retx_queue = 0;
+     log_h->debug("Buffer state PDCP: rnti=0x%x, lcid=%d, tx_queue=%d\n", rnti, lcid, tx_queue);
+     mac->rlc_buffer_state(rnti, lcid, tx_queue, retx_queue);
++#ifdef ENABLE_DDRL
++    do_ext_report(rnti,lcid);
++#endif
+   }else{
+     ret = SRSLTE_ERROR;
+   }
+@@ -151,6 +157,9 @@ void rlc::write_pdu(uint16_t rnti, uint3
+     uint32_t retx_queue = 0; 
+     log_h->debug("Buffer state PDCP: rnti=0x%x, lcid=%d, tx_queue=%d\n", rnti, lcid, tx_queue);
+     mac->rlc_buffer_state(rnti, lcid, tx_queue, retx_queue);
++#ifdef ENABLE_DDRL
++    do_ext_report(rnti,lcid);
++#endif
+   }
+   pthread_rwlock_unlock(&rwlock);
+ }
+@@ -167,6 +176,9 @@ void rlc::write_sdu(uint16_t rnti, uint3
+ 
+   pthread_rwlock_rdlock(&rwlock);
+   if (users.count(rnti)) {
++#ifdef ENABLE_DDRL
++	  sdu->set_timestamp();
++#endif
+     if(rnti != SRSLTE_MRNTI){
+       users[rnti].rlc->write_sdu(lcid, std::move(sdu), false);
+       tx_queue   = users[rnti].rlc->get_buffer_state(lcid);
+@@ -179,6 +191,9 @@ void rlc::write_sdu(uint16_t rnti, uint3
+     
+     uint32_t retx_queue = 0; 
+     mac->rlc_buffer_state(rnti, lcid, tx_queue, retx_queue);
++#ifdef ENABLE_DDRL
++    do_ext_report(rnti,lcid);
++#endif
+     log_h->info("Buffer state: rnti=0x%x, lcid=%d, tx_queue=%d\n", rnti, lcid, tx_queue);
+   }
+   pthread_rwlock_unlock(&rwlock);

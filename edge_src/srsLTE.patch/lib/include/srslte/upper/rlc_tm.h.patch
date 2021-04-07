@@ -1,0 +1,13 @@
+--- srsLTE/lib/include/srslte/upper/rlc_tm.h	2021-03-25 21:20:59.932588950 +1100
++++ srsLTE_modified/lib/include/srslte/upper/rlc_tm.h	2021-03-22 16:20:01.284532000 +1100
+@@ -33,6 +33,10 @@ namespace srslte {
+ 
+ class rlc_tm : public rlc_common
+ {
++#ifdef ENABLE_DDRL
++		long get_head_of_line();
++		struct timeval get_head_timestamp();
++#endif
+ public:
+   rlc_tm(srslte::log*                  log_,
+          uint32_t                      lcid_,

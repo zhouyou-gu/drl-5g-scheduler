@@ -1,0 +1,15 @@
+//
+// Created on 20/9/19.
+// Author: Zhouyou Gu <guzhouyou@gmail.com>.
+//
+
+
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+package ddrl;
+message scalar {
+    int64 tti = 1;
+    google.protobuf.Timestamp timestamp = 2;
+    string name = 3;
+    float value = 4;
+}

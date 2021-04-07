@@ -1,0 +1,45 @@
+--- srsLTE/srsenb/enb.conf.example	2021-03-25 21:20:59.988589480 +1100
++++ srsLTE_modified/srsenb/enb.conf.example	2021-03-22 16:20:01.236531000 +1100
+@@ -28,7 +28,7 @@ mnc = 01
+ mme_addr = 127.0.1.100
+ gtp_bind_addr = 127.0.1.1
+ s1c_bind_addr = 127.0.1.1
+-n_prb = 50
++n_prb = 15
+ #tm = 4
+ #nof_ports = 2
+ 
+@@ -69,14 +69,16 @@ drb_config = drb.conf
+ dl_earfcn = 3400
+ tx_gain = 80
+ rx_gain = 40
+-
++dl_freq = 5675000000
++ul_freq = 5685000000
+ #device_name = auto
+ 
+ # For best performance in 2x2 MIMO and >= 15 MHz use the following device_args settings:
+ #     USRP B210: pass num_recv_frames=64,num_send_frames=64
+ 
+ #device_args = auto
+-#time_adv_nsamples = auto
++#time_adv_nsamples = 171
++time_adv_nsamples = auto
+ #burst_preamble_us = auto
+ 
+ 
+@@ -180,10 +182,10 @@ nof_ctrl_symbols = 3
+ [expert]
+ #pusch_max_its        = 8 # These are half iterations
+ #pusch_8bit_decoder   = false
+-#nof_phy_threads      = 3
+-#metrics_period_secs  = 1
+-#metrics_csv_enable   = false
+-#metrics_csv_filename = /tmp/enb_metrics.csv
++nof_phy_threads      = 2
++metrics_period_secs  = 10
++metrics_csv_enable   = true
++metrics_csv_filename = /tmp/enb_metrics.csv
+ #pregenerate_signals  = false
+ #tx_amplitude         = 0.6
+ #link_failure_nof_err = 50

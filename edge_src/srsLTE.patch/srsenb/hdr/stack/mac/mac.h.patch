@@ -1,0 +1,25 @@
+--- srsLTE/srsenb/hdr/stack/mac/mac.h	2021-03-25 21:20:59.988589480 +1100
++++ srsLTE_modified/srsenb/hdr/stack/mac/mac.h	2021-03-22 16:20:01.264532000 +1100
+@@ -35,7 +35,9 @@
+ #include "scheduler_metric.h"
+ #include "srslte/interfaces/enb_metrics_interface.h"
+ #include "ue.h"
+-
++#ifdef ENABLE_DDRL
++#include "srs_ext.h"
++#endif
+ namespace srsenb {
+   
+ class pdu_process_handler
+@@ -51,6 +53,11 @@ class mac : public mac_interface_phy_lte
+             public pdu_process_handler
+ {
+ public:
++#ifdef ENABLE_DDRL
++	int set_qci(uint16_t rnti, uint8_t lc_id, uint8_t qci);
++	int set_head_of_line(uint16_t rnti, uint8_t lc_id, long hol);
++	int set_head_timestamp(uint16_t rnti, uint8_t lc_id, struct timeval hts);
++#endif	
+   mac();
+   ~mac();
+   bool init(const mac_args_t&        args_,

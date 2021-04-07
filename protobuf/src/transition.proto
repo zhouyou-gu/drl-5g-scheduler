@@ -1,0 +1,25 @@
+//
+// Created on 20/9/19.
+// Author: Zhouyou Gu <guzhouyou@gmail.com>.
+//
+
+
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+package ddrl;
+
+message ue_transition {
+    uint32 rnti = 1;
+    uint32 id = 2;
+    float reward = 3;
+    repeated float state = 4;
+    repeated float action = 5;
+    repeated float next_state = 6;
+}
+
+
+message enb_transition {
+    uint64 tti = 1;
+    google.protobuf.Timestamp timestamp = 2;
+    repeated ue_transition transition = 3;
+}

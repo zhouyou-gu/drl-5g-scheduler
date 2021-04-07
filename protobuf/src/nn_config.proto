@@ -1,0 +1,19 @@
+//
+// Created on 20/9/19.
+// Author: Zhouyou Gu <guzhouyou@gmail.com>.
+//
+
+
+syntax = "proto3";
+package ddrl;
+message nn_config{
+    string name = 1;
+    repeated uint32 nn_arch = 2;
+    enum af_type {
+        NONE = 0;
+        RELU = 1;
+        SIGMOID = 2;
+        TANH = 3;
+    }
+    repeated af_type af_config = 3;
+}

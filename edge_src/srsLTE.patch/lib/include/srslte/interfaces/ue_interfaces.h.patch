@@ -1,0 +1,13 @@
+--- srsLTE/lib/include/srslte/interfaces/ue_interfaces.h	2021-03-25 21:20:59.924588875 +1100
++++ srsLTE_modified/lib/include/srslte/interfaces/ue_interfaces.h	2021-03-22 16:20:01.288532000 +1100
+@@ -611,9 +611,9 @@ public:
+ 
+       // Supervision info
+       rach_cfg.preambleTransMax          = cfg.ra_supervision_info.preamb_trans_max.to_number();
++
+       rach_cfg.responseWindowSize        = cfg.ra_supervision_info.ra_resp_win_size.to_number();
+       rach_cfg.contentionResolutionTimer = cfg.ra_supervision_info.mac_contention_resolution_timer.to_number();
+-
+       // HARQ Msg3
+       harq_cfg.max_harq_msg3_tx = cfg.max_harq_msg3_tx;
+     }

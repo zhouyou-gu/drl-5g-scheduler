@@ -1,0 +1,9 @@
+--- srsLTE/README.md	2021-03-25 21:20:59.904588684 +1100
++++ srsLTE_modified/README.md	2021-03-22 16:20:01.216531000 +1100
+@@ -1,4 +1,6 @@
+ srsLTE
++v19.06
++c4bcd6e287fc67bf85fb82a41d1f8f2c901ed8d5
+ ========
+ 
+ [![Build Status](https://travis-ci.org/srsLTE/srsLTE.svg?branch=master)](https://travis-ci.org/srsLTE/srsLTE)

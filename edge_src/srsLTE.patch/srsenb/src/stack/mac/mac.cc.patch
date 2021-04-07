@@ -1,0 +1,24 @@
+--- srsLTE/srsenb/src/stack/mac/mac.cc	2021-03-25 21:20:59.992589519 +1100
++++ srsLTE_modified/srsenb/src/stack/mac/mac.cc	2021-03-22 16:20:01.248532000 +1100
+@@ -33,6 +33,10 @@
+ #include "srsenb/hdr/stack/mac/mac.h"
+ #include "srslte/common/log.h"
+ 
++#ifdef ENABLE_DDRL
++#include "ops_global_sync.h"
++#endif
++
+ //#define WRITE_SIB_PCAP
+ using namespace asn1::rrc;
+ 
+@@ -595,7 +599,9 @@ int mac::get_dl_sched(uint32_t tti, dl_s
+       Warning("Invalid DL scheduling result. User 0x%x does not exist\n", rnti);
+     }
+   }
+-
++#ifdef ENABLE_DDRL
++ops_global_sync::ops_output_processed();
++#endif
+   // No more uses of shared ue_db beyond here
+   pthread_rwlock_unlock(&rwlock);
+ 

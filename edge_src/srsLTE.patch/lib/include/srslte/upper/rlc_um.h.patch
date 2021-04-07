@@ -1,0 +1,29 @@
+--- srsLTE/lib/include/srslte/upper/rlc_um.h	2021-03-25 21:20:59.932588950 +1100
++++ srsLTE_modified/lib/include/srslte/upper/rlc_um.h	2021-03-22 16:20:01.276532000 +1100
+@@ -43,6 +43,10 @@ class rlc_um
+     :public rlc_common
+ {
+ public:
++#ifdef ENABLE_DDRL
++	long get_head_of_line();
++	struct timeval get_head_timestamp();
++#endif
+   rlc_um(srslte::log*               log_,
+          uint32_t                   lcid_,
+          srsue::pdcp_interface_rlc* pdcp_,
+@@ -76,8 +80,15 @@ private:
+ 
+   // Transmitter sub-class
+   class rlc_um_tx
++#ifdef ENABLE_DDRL
++	: public rlc_common_ext
++#endif
+   {
+   public:
++#ifdef ENABLE_DDRL
++			long get_head_of_line();
++			struct timeval get_head_timestamp();
++#endif
+     rlc_um_tx(srslte::log* log_);
+     ~rlc_um_tx();
+     bool     configure(rlc_config_t cfg, std::string rb_name);

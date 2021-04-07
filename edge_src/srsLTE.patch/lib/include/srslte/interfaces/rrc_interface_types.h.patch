@@ -1,0 +1,11 @@
+--- srsLTE/lib/include/srslte/interfaces/rrc_interface_types.h	2021-03-25 21:20:59.924588875 +1100
++++ srsLTE_modified/lib/include/srslte/interfaces/rrc_interface_types.h	2021-03-22 16:20:01.288532000 +1100
+@@ -213,7 +213,7 @@ struct rlc_um_config_t {
+   bool     is_mrb; // Whether this is a multicast bearer
+ };
+ 
+-#define RLC_TX_QUEUE_LEN (128)
++#define RLC_TX_QUEUE_LEN (10)
+ 
+ class rlc_config_t
+ {

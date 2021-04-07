@@ -1,0 +1,38 @@
+//
+// Created on 30/9/19.
+// Author: Zhouyou Gu <guzhouyou@gmail.com>.
+//
+
+
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+
+package ops;
+
+message ops_cell_conf {
+    uint32 cell_id = 1;
+    uint32 n_prb = 2;
+    uint32 tti_duration = 3;
+}
+
+
+message ops_ue_input {
+    uint32 rnti = 1;
+    google.protobuf.Timestamp hts = 2;
+    float alpha = 3;
+}
+
+message ops_input {
+    uint64 tti = 1;
+    repeated ops_ue_input ue_input = 2;
+}
+
+message ops_ue_output {
+    uint32 rnti = 1;
+    bool tx = 2;
+}
+
+message ops_output {
+    uint64 tti = 1;
+    repeated ops_ue_output ue_output = 2;
+}

@@ -1,0 +1,31 @@
+--- srsLTE/lib/include/srslte/common/common.h	2021-03-25 21:20:59.920588836 +1100
++++ srsLTE_modified/lib/include/srslte/common/common.h	2021-03-22 16:20:01.284532000 +1100
+@@ -87,7 +87,7 @@
+ 
+ namespace srslte {
+ 
+-//#define ENABLE_TIMESTAMP
++#define ENABLE_TIMESTAMP
+ 
+ /******************************************************************************
+  * Byte and Bit buffers
+@@ -175,7 +175,18 @@ public:
+       timestamp_is_set = true;
+ #endif
+     }
+-
++#ifdef ENABLE_DDRL
++		struct timeval get_timestamp()
++	{
++#ifdef ENABLE_TIMESTAMP
++		if(!timestamp_is_set){
++			gettimeofday(&timestamp[1], NULL); //if timestamp is not set, use the current time as timestamp
++			timestamp_is_set = true;
++		}
++		return timestamp[1];
++#endif
++	}
++#endif
+   private:
+ #ifdef ENABLE_TIMESTAMP
+     struct timeval timestamp[3];

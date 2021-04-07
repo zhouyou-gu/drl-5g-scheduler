@@ -1,0 +1,38 @@
+--- srsLTE/srsenb/src/stack/mac/scheduler.cc	2021-03-25 21:20:59.992589519 +1100
++++ srsLTE_modified/srsenb/src/stack/mac/scheduler.cc	2021-03-22 16:20:01.248532000 +1100
+@@ -51,6 +51,9 @@ void sched::tti_sched_t::init(sched* par
+ 
+ void sched::tti_sched_t::new_tti(uint32_t tti_rx_, uint32_t start_cfi)
+ {
++#ifdef ENABLE_DDRL
++	TTICounter::step_dl_tti();
++#endif
+   tti_alloc.new_tti(tti_rx_, start_cfi);
+ 
+   // internal state
+@@ -565,6 +568,11 @@ int sched::tti_sched_t::generate_format1
+  *******************************************************/
+ sched::sched() : bc_aggr_level(0), rar_aggr_level(0), P(0), si_n_rbg(0), rar_n_rbg(0), nof_rbg(0)
+ {
++#ifdef ENABLE_DDRL
++	/// TODO: add the init for ddrl
++	init_agent();
++	printf("end_init ++++");
++#endif
+   current_tti = 0;
+   log_h = NULL;
+   dl_metric = NULL;
+@@ -1241,7 +1249,12 @@ void sched::dl_sched_data(tti_sched_t* t
+                                  pending_msg3[pending_tti].enabled)) {
+     tti_sched->get_dl_mask().fill(0, tti_sched->get_dl_mask().size());
+   }
+-
++#ifdef ENABLE_DDRL
++//  test_function();
++//  TTICounter::tic("do_scheduling");
++  do_scheduling();
++//  TTICounter::tac();
++#endif
+   // call scheduler metric to fill RB grid
+   dl_metric->sched_users(ue_db, tti_sched);
+ }

@@ -1,0 +1,32 @@
+--- srsLTE/lib/include/srslte/interfaces/enb_interfaces.h	2021-03-25 21:20:59.924588875 +1100
++++ srsLTE_modified/lib/include/srslte/interfaces/enb_interfaces.h	2021-03-22 16:20:01.292532000 +1100
+@@ -29,6 +29,9 @@
+ #include "srslte/interfaces/rrc_interface_types.h"
+ #include "srslte/interfaces/sched_interface.h"
+ 
++#ifdef ENABLE_DDRL
++#include "srs_ext.h"
++#endif
+ #include <vector>
+ 
+ #ifndef SRSLTE_ENB_INTERFACES_H
+@@ -149,7 +152,10 @@ public:
+                           asn1::rrc::mcch_msg_s* mcch)                                             = 0;
+ };
+ 
+-class mac_interface_rlc 
++class mac_interface_rlc
++#ifdef ENABLE_DDRL
++: public mac_interface_ext
++#endif
+ {
+ public:   
+   virtual int rlc_buffer_state(uint16_t rnti, uint32_t lc_id, uint32_t tx_queue, uint32_t retx_queue) = 0;  
+@@ -267,7 +273,6 @@ public:
+   virtual void write_dl_info(uint16_t rnti, srslte::unique_byte_buffer_t sdu)                           = 0;
+   virtual void release_complete(uint16_t rnti) = 0;
+   virtual bool setup_ue_ctxt(uint16_t rnti, LIBLTE_S1AP_MESSAGE_INITIALCONTEXTSETUPREQUEST_STRUCT *msg) = 0;
+-  virtual bool modify_ue_ctxt(uint16_t rnti, LIBLTE_S1AP_MESSAGE_UECONTEXTMODIFICATIONREQUEST_STRUCT *msg) = 0;
+   virtual bool setup_ue_erabs(uint16_t rnti, LIBLTE_S1AP_MESSAGE_E_RABSETUPREQUEST_STRUCT *msg) = 0;
+   virtual bool release_erabs(uint32_t rnti) = 0;
+   virtual void add_paging_id(uint32_t ueid, LIBLTE_S1AP_UEPAGINGID_STRUCT UEPagingID) = 0; 

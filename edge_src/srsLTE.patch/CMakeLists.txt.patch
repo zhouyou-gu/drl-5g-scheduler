@@ -1,0 +1,66 @@
+--- srsLTE/CMakeLists.txt	2021-03-25 21:20:59.904588684 +1100
++++ srsLTE_modified/CMakeLists.txt	2021-03-22 16:20:01.220531000 +1100
+@@ -22,16 +22,24 @@
+ ########################################################################
+ # Prevent in-tree builds
+ ########################################################################
+-if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
++get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
++foreach(dir ${dirs})
++	message(STATUS "dir='${dir}'")
++endforeach()
++
++if(${PROJECT_SOURCE_DIR} STREQUAL ${PROJECT_BINARY_DIR})
+     message(FATAL_ERROR "Prevented in-tree build. This is bad practice.")
+-endif(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
++endif(${PROJECT_SOURCE_DIR} STREQUAL ${PROJECT_BINARY_DIR})
+ 
+ 
+ ########################################################################
+ # Project setup
+ ########################################################################
+-cmake_minimum_required(VERSION 2.6)
++cmake_minimum_required(VERSION 3.0)
+ project( SRSLTE )
++
++
++
+ message( STATUS "CMAKE_SYSTEM: " ${CMAKE_SYSTEM} )
+ message( STATUS "CMAKE_SYSTEM_PROCESSOR: " ${CMAKE_SYSTEM_PROCESSOR} )
+ message( STATUS "CMAKE_CXX_COMPILER: " ${CMAKE_CXX_COMPILER} )
+@@ -55,8 +63,8 @@ set(CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE}
+ 
+ # Generate CMake to include build information
+ configure_file(
+-  ${CMAKE_SOURCE_DIR}/cmake/modules/SRSLTEbuildinfo.cmake.in
+-  ${CMAKE_BINARY_DIR}/SRSLTEbuildinfo.cmake
++  ${PROJECT_SOURCE_DIR}/cmake/modules/SRSLTEbuildinfo.cmake.in
++  ${PROJECT_BINARY_DIR}/SRSLTEbuildinfo.cmake
+ )
+ 
+ ########################################################################
+@@ -248,10 +256,10 @@ set(DATA_DIR share/${CPACK_PACKAGE_NAME}
+ 
+ # Auto-generate config install helper and mark for installation
+ configure_file(
+-        ${CMAKE_SOURCE_DIR}/cmake/modules/SRSLTE_install_configs.sh.in
+-        ${CMAKE_BINARY_DIR}/srslte_install_configs.sh
++        ${PROJECT_SOURCE_DIR}/cmake/modules/SRSLTE_install_configs.sh.in
++        ${PROJECT_BINARY_DIR}/srslte_install_configs.sh
+ )
+-install(PROGRAMS ${CMAKE_BINARY_DIR}/srslte_install_configs.sh DESTINATION ${RUNTIME_DIR})
++install(PROGRAMS ${PROJECT_BINARY_DIR}/srslte_install_configs.sh DESTINATION ${RUNTIME_DIR})
+ 
+ ########################################################################
+ # Compiler specific setup
+@@ -292,8 +300,8 @@ if(CMAKE_C_COMPILER_ID MATCHES "GNU" OR
+       set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -ggdb -DBUILD_TYPE_RELWITHDEBINFO")
+       set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ggdb -DBUILD_TYPE_RELWITHDEBINFO")
+     else(${CMAKE_BUILD_TYPE} STREQUAL "RelWithDebInfo")
+-      set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O3 -fno-trapping-math -fno-math-errno -DBUILD_TYPE_RELEASE")
+-      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -fno-trapping-math -fno-math-errno -DBUILD_TYPE_RELEASE")
++      set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Ofast -fno-trapping-math -fno-math-errno -DBUILD_TYPE_RELEASE")
++      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Ofast -fno-trapping-math -fno-math-errno -DBUILD_TYPE_RELEASE")
+     endif(${CMAKE_BUILD_TYPE} STREQUAL "RelWithDebInfo")
+   endif(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
+ 
