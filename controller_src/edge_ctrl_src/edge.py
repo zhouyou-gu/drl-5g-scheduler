@@ -112,10 +112,10 @@ class Edge():
     # TODO: wait compile finish
 
     def clean_compilation(self):
-        clean_srs(os.path.join(self.epc, self.config.epc_config.working_dir , 'edge_src/'), self.config.epc_config.password)
-        clean_srs(os.path.join(self.enb, self.config.enb_config.working_dir , 'edge_src/'), self.config.enb_config.password)
+        clean_srs(self.epc, os.path.join(self.config.epc_config.working_dir , 'edge_src/'), self.config.epc_config.password)
+        clean_srs(self.enb, os.path.join(self.config.enb_config.working_dir , 'edge_src/'), self.config.enb_config.password)
         for u in range(len(self.ues)):
-            clean_srs(os.path.join(self.ues[u], self.config.ue_config_list[u].working_dir , 'edge_src/'),
+            clean_srs(self.ues[u], os.path.join(self.config.ue_config_list[u].working_dir , 'edge_src/'),
                       self.config.ue_config_list[u].password)
 
     def _compile_epc(self):
@@ -124,7 +124,7 @@ class Edge():
     # compile_srs(self.epc, self.config.epc_config.working_dir + 'edge_src/', self.config.epc_config.password,as_original_srslte=True)
 
     def _compile_enb(self):
-        compile_srs(os.path.join(self.enb, self.config.enb_config.working_dir , 'edge_src/'), self.config.enb_config.password,
+        compile_srs(self.enb, os.path.join(self.config.enb_config.working_dir , 'edge_src/'), self.config.enb_config.password,
                     ddrl_enabled=self._ddrl_enabled)
 
     def _compile_ues(self):
