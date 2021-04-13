@@ -77,7 +77,7 @@ In the  edge controller server, download a copy of this project. Then, fetch the
 python3 apply_srslte_patch.py
 ```
 
-Also, download the libtorch (at the version list in package dependency) in `edge_src` by running
+Also, download the libtorch (at the version listed in package dependency) in `edge_src` by running
 
 ```shell
 python3 install_libtorch.py
