@@ -43,15 +43,15 @@ class OneWayLatencyLTEEdge(Edge):
     def uplink_one_way_latency(self):
         t_list = []
         for u in range(len(self.ues)):
-            t = Thread(target=run_oneway_latency_server,
-                       args=(self.epc, self.config.epc_config.working_dir, 9000 + u, tb_server_ip))
+            t = Thread(target=sudo_run_oneway_latency_server,
+                       args=(self.epc, self.config.epc_config.password, self.config.epc_config.working_dir, 9000 + u, tb_server_ip))
             t.start()
             t_list.append(t)
 
         time.sleep(3)
         for u in range(len(self.ues)):
-            t = Thread(target=run_oneway_latency_client,
-                       args=(self.ues[u], self.config.ue_config_list[u].working_dir, '172.16.0.1', 9000 + u))
+            t = Thread(target=sudo_run_oneway_latency_client,
+                       args=(self.ues[u], self.config.ue_config_list[u].password, self.config.ue_config_list[u].working_dir, '172.16.0.1', 9000 + u))
             t.start()
             t_list.append(t)
 

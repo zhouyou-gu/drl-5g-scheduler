@@ -20,25 +20,26 @@ class OneWayLatencyETHEdge(Edge):
     def __init__(self, id, config):
         super(OneWayLatencyETHEdge, self).__init__(id, config)
 
-    def uplink_one_way_latency(self):
-        for u in range(len(self.ues)):
-            t = Thread(target=run_oneway_latency_server,
-                       args=(self.epc, self.config.epc_config.working_dir, 9000 + u, tb_server_ip))
-            t.start()
-            t = Thread(target=run_oneway_latency_client,
-                       args=(self.ues[u], self.config.ue_config_list[u].working_dir, '192.168.1.100', 9000 + u))
-            t.start()
-
     def downlink_one_way_latency(self):
         for u in range(len(self.ues)):
-            t = Thread(target=run_oneway_latency_server,
-                       args=(self.ues[u], self.config.ue_config_list[u].working_dir, 9000 + u, tb_server_ip))
+            t = Thread(target=sudo_run_oneway_latency_server,
+                       args=(self.ues[u], self.config.ue_config_list[u].password, self.config.ue_config_list[u].working_dir, 9000 + u, tb_server_ip))
             t.start()
         for u in range(len(self.ues)):
-            t = Thread(target=run_oneway_latency_client,
-                       args=(self.epc, self.config.epc_config.working_dir, '192.168.1.10' + str(u + 1), 9000 + u))
+            t = Thread(target=sudo_run_oneway_latency_client,
+                       args=(self.epc, self.config.epc_config.password, self.config.epc_config.working_dir, '192.168.1.10' + str(u + 1), 9000 + u))
+            t.start()
+
+    def uplink_one_way_latency(self):
+        for u in range(len(self.ues)):
+            t = Thread(target=sudo_run_oneway_latency_server,
+                       args=(self.epc, self.config.epc_config.password, self.config.epc_config.working_dir, 9000 + u, tb_server_ip))
+            t.start()
+            t = Thread(target=sudo_run_oneway_latency_client,
+                       args=(self.ues[u], self.config.ue_config_list[u].password, self.config.ue_config_list[u].working_dir, '192.168.1.100', 9000 + u))
             t.start()
 
 
 e = OneWayLatencyETHEdge(0, edge_config)
 e.downlink_one_way_latency()
+# e.uplink_one_way_latency()

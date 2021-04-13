@@ -29,7 +29,7 @@ class OneWayLatencyETHEdge(Edge):
             cmd = pp + ' python3 ' + sp
 
             t = Thread(target=run_one_sudo_cmd, args=(
-            self.epc, cmd + ' ' + str(9000 + u) + ' ' + CONTROLLER_IP, self.config.epc_config.password,))
+            self.ues[u], cmd + ' ' + str(9000 + u) + ' ' + CONTROLLER_IP, self.config.ue_config_list[u].password,))
             t.start()
             t_list.append(t)
         time.sleep(3)
@@ -59,8 +59,8 @@ class OneWayLatencyETHEdge(Edge):
 
         time.sleep(3)
         for u in range(len(self.ues)):
-            t = Thread(target=run_oneway_latency_client,
-                       args=(self.ues[u], self.config.ue_config_list[u].working_dir, '192.168.1.100', 9000 + u))
+            t = Thread(target=sudo_run_oneway_latency_client,
+                       args=(self.ues[u], self.config.ue_config_list[u].password, self.config.ue_config_list[u].working_dir, '192.168.1.100', 9000 + u))
             t.start()
             t_list.append(t)
 
@@ -70,3 +70,4 @@ class OneWayLatencyETHEdge(Edge):
 
 e = OneWayLatencyETHEdge(0, edge_config)
 e.downlink_one_way_latency()
+# e.uplink_one_way_latency()

@@ -59,8 +59,8 @@ class OneWayLatencyLTEEdge(Edge):
 
         time.sleep(3)
         for u in range(len(self.ues)):
-            t = Thread(target=run_oneway_latency_client,
-                       args=(self.ues[u], self.config.ue_config_list[u].working_dir, '172.16.0.1', 9000 + u))
+            t = Thread(target=sudo_run_oneway_latency_client,
+                       args=(self.ues[u], self.config.ue_config_list[u].password, self.config.ue_config_list[u].working_dir, '172.16.0.1', 9000 + u))
             t.start()
             t_list.append(t)
 
