@@ -141,7 +141,7 @@ class Edge():
 
     def _run_enb(self, time_s):
         t = Thread(target=run_srsenb, args=(
-            self.enb, os.path.join(self.config.epc_config.working_dir , 'edge_src/build/srsLTE/srsenb/src/srsenb'),
+            self.enb, os.path.join(self.config.enb_config.working_dir , 'edge_src/build/srsLTE/srsenb/src/srsenb'),
             self.config.enb_config.password, time_s,))
         t.start()
         self.t_enb = t
