@@ -56,7 +56,7 @@ An example of off-line training script is shown in `controller_src/sim_sript_exa
 PYTHONPATH=./ python3 ./sim_sript_example/ka.py
 ```
 
-All logged training information is stored by tensorboard in `controller_src/sim_sript_example/tb-data`. To see the training information, run the follows under `controller_src/sim_sript_example/tb-data`,
+The above script creates a logging folder as `controller_src/sim_sript_example/tb-data` (for details, please check `ka.py` and other related codes). To see the training information, run the follows under `controller_src/sim_sript_example/tb-data`,
 
 ```shell
 tensorboard --logdir ./ --bind_all
@@ -66,12 +66,12 @@ Then, use a browser to open the Tensorboad web interface on the port that is sho
 
 ### Online experiment setup
 
-The reference setup of the equipment is shown in the following picture, where all computers are required to be configured with package dependency as listed in the previous section.
+The reference setup of the equipment is shown in the following picture, where all computers are required to be configured with package dependency as listed in the previous section. Also, all computers need to have network connections with the edge controller server for experiments.
 
 ![setup](./controller_src/edge_ctrl_script/ctrl_web_interface/assets/ddrl.png)
 
 
-In the  edge controller server, download a copy of this project. Then, fetch the srsLTE source code at commit `c4bcd6e287fc67bf85fb82a41d1f8f2c901ed8d5`  and place srsLTE source codes as `edge_src/srsLTE`. After that, switch the working directory to `edge_src` and apply the patch to srsLTE by running
+In the edge controller server, download a copy of this project. Then, fetch the srsLTE source code at commit `c4bcd6e287fc67bf85fb82a41d1f8f2c901ed8d5`  and place srsLTE source codes as `edge_src/srsLTE`. After that, switch the working directory to `edge_src` and apply the patch to srsLTE by running
 
 ```shell
 python3 apply_srslte_patch.py
@@ -101,7 +101,7 @@ and have another cup of coffee/tea. After the compilation, run the demo web GUI 
 PYTHONPATH=./ python3 ./edge_ctrl_script/ctrl_web_interface/app.py
 ```
 
-Open `0.0.0.0:8080` in the browser and click on the button from the top to the bottom to start the experiments: 1) time synchronization, 2) the NN training controller, 3) the srsLTE edge cellular network, 4) ping tests, 5) one-way latency tests in downlink. If you have configured every part correctly, the real-time measured latency will show up in plots at the bottom of web GUI as
+Open `0.0.0.0:8080` in the browser and click on the button from the top to the bottom to start the experiments: 1) PTP time synchronization of edge computers, 2) the NN training controller, 3) the srsLTE edge cellular network, 4) ping tests, 5) one-way latency tests in downlink. If you have configured every part correctly, the real-time measured latency will show up in plots at the bottom of web GUI as
 
 
 ![demo](./controller_src/edge_ctrl_script/ctrl_web_interface/assets/demo.png)
