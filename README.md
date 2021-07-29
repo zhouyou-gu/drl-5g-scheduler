@@ -7,12 +7,15 @@ Supervisors: Wibowo Hardjawana (wibowo.hardjawana@sydney.edu.au); Branka Vucetic
 *This project is developed at [Centre for IoT and Telecommunications](https://www.sydney.edu.au/engineering/our-research/internet-of-things/centre-for-iot-and-telecommunications.html) at The University of Sydney, under a project directly funded by Telstra Corporation Ltd., titled ”Development of an Open Programmable Scheduler for LTE Networks”, from 2018 to 2019. The reference to our paper :*
 
 > ```
-> @article{gu2020knowledge,
-> title={Knowledge-assisted deep reinforcement learning in {5G} scheduler design: From theoretical framework to implementation},
-> author={Gu, Zhouyou and She, Changyang and Hardjawana, Wibowo and Lumb, Simon and McKechnie, David and Essery, Todd and Vucetic, Branka},
-> journal={Accepted in IEEE JSAC series on "Machine Learning in Communications and Networks"},
-> year={2020}
-> }
+>@ARTICLE{gu2021knowledge,
+>author={Gu, Zhouyou and She, Changyang and Hardjawana, Wibowo and Lumb, Simon and McKechnie, David and Essery, Todd and Vucetic, Branka},
+>journal={IEEE Journal on Selected Areas in Communications}, 
+>title={Knowledge-Assisted Deep Reinforcement Learning in {5G} Scheduler Design: From Theoretical Framework to Implementation}, 
+>year={2021},
+>volume={39},
+>number={7},
+>pages={2014-2028},
+>doi={10.1109/JSAC.2021.3078498}}
 > ```
 
 ### Package Dependency
