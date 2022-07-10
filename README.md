@@ -4,6 +4,8 @@ Author: Zhouyou Gu (zhouyou.gu@sydney.edu.au);
 
 Supervisors: Wibowo Hardjawana (wibowo.hardjawana@sydney.edu.au); Branka Vucetic (branka.vucetic@sydney.edu.au)
 
+Collaborators: Changyang She from The University of Sydney; Simon Lumb, David McKechnie, and Todd Essery from Telstra Corporation Ltd.
+
 *This project is developed at [Centre for IoT and Telecommunications](https://www.sydney.edu.au/engineering/our-research/internet-of-things/centre-for-iot-and-telecommunications.html) at The University of Sydney, under a project directly funded by Telstra Corporation Ltd., titled ”Development of an Open Programmable Scheduler for LTE Networks”, from 2018 to 2019. The reference to our paper :*
 
 > ```
