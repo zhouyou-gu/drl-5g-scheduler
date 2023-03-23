@@ -88,6 +88,13 @@ Also, download the libtorch (at the version listed in package dependency) in `ed
 python3 install_libtorch.py
 ```
 
+In the project root path, run the following command to recompile the protobuf
+
+```shell
+cmake ./
+```
+
+
 In `controller_src/edge_ctrl_src/edge_config.py`, add the ssh access configurations of the computers, e.g., usernames/passwords/remote working directories. Switch the working directory in the edge controller server to `controller_src` and run
 
 ```shell
