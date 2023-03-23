@@ -46,7 +46,7 @@ if(BUILD_DDRL)
 	add_subdirectory(scheduler)
 	add_subdirectory(test)
 	link_libraries(ddrl_util protobuf ops_global_sync)
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-comment -Wno-reorder -Wno-unused-but-set-variable -Wno-unused-variable -Wtype-limits -std=c++11")
+	#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-comment -Wno-reorder -Wno-unused-but-set-variable -Wno-unused-variable -Wtype-limits -std=c++11")
 
 else(BUILD_DDRL)
 	message(STATUS "DDRL build disabled")
