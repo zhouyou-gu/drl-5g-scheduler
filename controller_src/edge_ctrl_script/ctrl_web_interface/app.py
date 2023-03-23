@@ -51,7 +51,15 @@ class DDRLWebInterface(dash.Dash):
                     html.Div(style={'backgroundColor': colors['background'], 'width': '95%', 'height': '100%',
                                     'max-width': 'none'}, className="container", children=[
                         html.H1(
-                            children='Real-time Deep Reinforcement Learning for 5G-Scheduling',
+                            children='Real-time Deep Reinforcement Learning',
+                            style={
+                                'textAlign': 'center',
+                                'color': colors['heading'],
+                                'font-size': HEADING_FONT_SIZE,
+                            }
+                        ),
+                        html.H1(
+                            children='for Per-Millisecond Scheduling in 5G',
                             style={
                                 'textAlign': 'center',
                                 'color': colors['heading'],
