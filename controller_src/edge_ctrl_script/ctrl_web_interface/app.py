@@ -36,6 +36,7 @@ HEADING_FONT_SIZE  = "80pt"
 SUBTITLE_FONT_SIZE  = "30pt"
 TEXT_FONT_SIZE = "20pt"
 
+Y_RANGE = 30
 
 class DDRLWebInterface(dash.Dash):
     def __init__(self, name, external_stylesheets=external_stylesheets):
@@ -58,21 +59,21 @@ class DDRLWebInterface(dash.Dash):
                             }
                         ),
                         html.H2(
-                            children='Presented by Zhouyou Gu, Supervisors: Wibowo Hardjawana, Branka Vucetic',
+                            children='Presented by Zhouyou Gu',
                             style={
                                 'textAlign': 'center',
                                 'color': colors['title'],
                                 'font-size': SUBTITLE_FONT_SIZE,
                             }
                         ),
-                        html.H1(
-                            children='Paper: Knowledge-assisted Deep Reinforcement Learning in 5G Scheduler Design: From Theoretical Framework to Implementation',
-                            style={
-                                'textAlign': 'center',
-                                'color': colors['title'],
-                                'font-size': SUBTITLE_FONT_SIZE,
-                            }
-                        ),
+                        # html.H1(
+                        #     children='Paper: Knowledge-assisted Deep Reinforcement Learning in 5G Scheduler Design: From Theoretical Framework to Implementation',
+                        #     style={
+                        #         'textAlign': 'center',
+                        #         'color': colors['title'],
+                        #         'font-size': SUBTITLE_FONT_SIZE,
+                        #     }
+                        # ),
                         html.H2(
                             children='Centre for IoT and Telecommunications, Faculty of Engineering, The University of Sydney',
                             style={
@@ -275,7 +276,7 @@ def update_graph_scatter(input_data):
         x_min = x[0]
 
     return {'data': [data], 'layout': go.Layout(xaxis=dict(range=[x_min, time.time() - now]),
-                                                yaxis=dict(range=[0, 15]),
+                                                yaxis=dict(range=[0, Y_RANGE]),
                                                 plot_bgcolor=colors['background'],
                                                 paper_bgcolor=colors['background'],
                                                 font={'color': colors['text'],
@@ -309,7 +310,7 @@ def update_graph_scatter(input_data):
         x_min = x[0]
 
     return {'data': [data], 'layout': go.Layout(xaxis=dict(range=[x_min, time.time() - now]),
-                                                yaxis=dict(range=[0, 15]),
+                                                yaxis=dict(range=[0, Y_RANGE]),
                                                 plot_bgcolor=colors['background'],
                                                 paper_bgcolor=colors['background'],
                                                 font={'color': colors['text'],
