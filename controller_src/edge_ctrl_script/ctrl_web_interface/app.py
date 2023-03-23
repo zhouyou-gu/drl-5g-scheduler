@@ -51,7 +51,7 @@ class DDRLWebInterface(dash.Dash):
                     html.Div(style={'backgroundColor': colors['background'], 'width': '95%', 'height': '100%',
                                     'max-width': 'none'}, className="container", children=[
                         html.H1(
-                            children='Real-time Deep Reinforcement Learning',
+                            children='Real-Time Deep Reinforcement Learning',
                             style={
                                 'textAlign': 'center',
                                 'color': colors['heading'],
