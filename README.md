@@ -46,7 +46,7 @@ sudo apt-get install python3-pip linuxptp ntp linux-lowlatency cmake build-essen
 Install other Python packages
 
 ```bash
-sudo pip3 tb-nightly paramiko matplotlib scipy future scp dash
+sudo pip3 tensorboard paramiko matplotlib scipy future scp dash
 ```
 
 ### Overall Code Structure
