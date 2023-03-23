@@ -11,7 +11,5 @@ from edge_ctrl_src.edge import Edge
 from edge_ctrl_src.edge_config import edge_config
 
 e = Edge(0, edge_config)
-e.sync_global_time()
-e.sync_global_time()
-e.compile()
+e.clean_compilation()
 # # e._compile_enb()

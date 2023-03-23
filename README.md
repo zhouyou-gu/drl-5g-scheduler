@@ -40,7 +40,7 @@ Install other Linux packages
 
 ```bash
 sudo apt-get update
-sudo apt-get install python3-pip linuxptp ntp linux-lowlatency cmake build-essential libfftw3-dev libmbedtls-dev libboost-program-options-dev libconfig++-dev libsctp-dev libpcsclite-dev python3-pandas iperf
+sudo apt-get install python3-pip net-tools linuxptp systemd-timesyncd ntp linux-lowlatency cmake build-essential libfftw3-dev libmbedtls-dev libboost-program-options-dev libconfig++-dev libsctp-dev libpcsclite-dev python3-pandas iperf
 ```
 
 Install other Python packages

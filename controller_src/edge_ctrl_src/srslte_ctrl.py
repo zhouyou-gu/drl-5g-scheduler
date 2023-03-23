@@ -37,7 +37,7 @@ def compile_srs(ssh_client: paramiko.client.SSHClient, path_to_srs: str, passwor
     print_stdout_blocking(stdout, "load_so_srs", ip, port)
     print_stderr_blocking(stderr, "load_so_srs", ip, port)
 
-    cmd = 'cd ' + path_to_srs + '; cd build/srsLTE; srslte_install_configs.sh user'
+    cmd = 'cd ' + path_to_srs + '; cd build/srsLTE; srslte_install_configs.sh service'
     ch, stdin, stdout, stderr = no_sudo_exec(ssh_client, cmd)
     print_stdout_blocking(stdout, "config_srs", ip, port)
     print_stderr_blocking(stderr, "config_srs", ip, port)
