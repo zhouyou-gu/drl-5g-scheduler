@@ -17,7 +17,7 @@ import paramiko
 from edge_ctrl_src.app_ctrl import no_sudo_exec
 from edge_ctrl_src.edge import PC_ACCESS_CONFIG
 
-controller_config = PC_ACCESS_CONFIG(name='deep', ip='0.0.0.0', port=22, username='deep', password='deep',
+controller_config = PC_ACCESS_CONFIG(name='deep', ip='0.0.0.0', port=22, username='deep', password='sdr123!deep',
                                      working_dir='~/')
 
 controller = paramiko.SSHClient()
