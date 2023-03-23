@@ -32,7 +32,7 @@ colors = {
     'title': '#111111'
 }
 
-HEADING_FONT_SIZE  = "80pt"
+HEADING_FONT_SIZE  = "60pt"
 SUBTITLE_FONT_SIZE  = "30pt"
 TEXT_FONT_SIZE = "20pt"
 
@@ -51,7 +51,7 @@ class DDRLWebInterface(dash.Dash):
                     html.Div(style={'backgroundColor': colors['background'], 'width': '95%', 'height': '100%',
                                     'max-width': 'none'}, className="container", children=[
                         html.H1(
-                            children='DRL-5G-Scheduler',
+                            children='Real-time Deep Reinforcement Learning for 5G-Scheduling',
                             style={
                                 'textAlign': 'center',
                                 'color': colors['heading'],
@@ -75,7 +75,7 @@ class DDRLWebInterface(dash.Dash):
                         #     }
                         # ),
                         html.H2(
-                            children='Centre for IoT and Telecommunications, Faculty of Engineering, The University of Sydney',
+                            children='Centre for IoT and Telecommunications, EIE, USYD',
                             style={
                                 'textAlign': 'center',
                                 'color': colors['title'],
