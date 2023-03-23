@@ -12,18 +12,18 @@ from edge_ctrl_src.edge import PC_ACCESS_CONFIG, EDGE_ACCESS_CONFIG
 
 ue_config_list = []
 # SSH access to edge
-ue1 = PC_ACCESS_CONFIG(name='ue1', ip='IP-TO-UE1', port='PORT-TO-UE1', username='USERNAME-OF-UE1', password='PASSWORD-TO-UE1',
+ue1 = PC_ACCESS_CONFIG(name='ue1', ip='192.168.1.101', port='22', username='ue1', password='sdr123!ue1',
                        working_dir='~/drl-5g-scheduler/')
-ue2 = PC_ACCESS_CONFIG(name='ue2', ip='IP-TO-UE2', port='PORT-TO-UE2', username='USERNAME-OF-UE2', password='PASSWORD-TO-UE2',
+ue2 = PC_ACCESS_CONFIG(name='ue2', ip='192.168.1.102', port='22', username='ue2', password='sdr123!ue2',
                        working_dir='~/drl-5g-scheduler/')
 ue_config_list.append(ue1)
 ue_config_list.append(ue2)
 
-enb = PC_ACCESS_CONFIG(name='enb', ip='IP-TO-ENB', port='PORT-TO-ENB', username='USERNAME-OF-ENB', password='PASSWORD-TO-ENB',
+enb = PC_ACCESS_CONFIG(name='enb', ip='192.168.1.100', port='22', username='enb', password='sdr123!enb',
                        working_dir='~/drl-5g-scheduler/')
 epc = enb
 
 edge_config = EDGE_ACCESS_CONFIG(epc_config=epc, enb_config=enb, ue_config_list=ue_config_list)
 
 # the ip for controller
-CONTROLLER_IP = "IP-TO-EDGE-CONTROLLER-SERVER"
+CONTROLLER_IP = "192.168.1.200"
