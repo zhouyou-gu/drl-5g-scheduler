@@ -64,7 +64,8 @@ class TransitionLister(ConnListener):
         total_rwd = 0.
         u_id = 0
         for u in t.transition:
-            print(t.tti,u.__str__().replace('\n', ''))
+            if t.tti % 100 == 0:
+                print(t.tti,u.__str__().replace('\n', ', '))
             if u.state[0] > 0.:
                 self.logger.get_tb_logger().add_scalar('rwd.' + str(u_id), u.reward, t.tti,
                                                        float(t.timestamp.ToMicroseconds()) / 1e6)
