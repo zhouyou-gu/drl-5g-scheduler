@@ -260,10 +260,9 @@ def update_graph_scatter(input_data):
     r = U.get_report()
     x = []
     y = []
-    if 'ue1' in r:
-        for u in r['ue1']:
-            x.append(u[0] - now)
-            y.append(float(u[1]) / 1e6)
+    for u in r[0]:
+        x.append(u[0] - now)
+        y.append(float(u[1]) / 1e6)
 
     data = plotly.graph_objs.Scatter(
         x=x,
@@ -294,10 +293,9 @@ def update_graph_scatter(input_data):
     r = U.get_report()
     x = []
     y = []
-    if 'ue2' in r:
-        for u in r['ue2']:
-            x.append(u[0] - now)
-            y.append(float(u[1]) / 1e6)
+    for u in r[1]:
+        x.append(u[0] - now)
+        y.append(float(u[1]) / 1e6)
 
     data = plotly.graph_objs.Scatter(
         x=x,
