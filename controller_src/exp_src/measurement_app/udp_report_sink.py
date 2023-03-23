@@ -20,16 +20,19 @@ class udp_report_sink(Thread):
         Thread.__init__(self)
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
         self.sock.bind(('0.0.0.0', UDP_REPORT_SINK_PORT))
-        self.data_queue = {}
-
+        self.data_queue = []
+        self.data_queue_name_idx = {}
+        self.data_queue_len = 0
     def run(self):
         while True:
             data = self.sock.recv(4096)
             data = data.decode('utf-8')
             d = data.split()
-            if d[0] not in self.data_queue:
-                self.data_queue[d[0]] = deque(maxlen=100)
-            self.data_queue[d[0]].append((time.time(), d[1]))
+            if d[0] not in self.data_queue_name_idx:
+                self.data_queue_name_idx[d[0]] = self.data_queue_len
+                self.data_queue.append(deque(maxlen=100))
+                self.data_queue_len = self.data_queue_len + 1
+            self.data_queue[self.data_queue_name_idx[d[0]]].append((time.time(), d[1]))
 
     def get_report(self):
         return self.data_queue
