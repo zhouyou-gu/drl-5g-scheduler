@@ -58,14 +58,14 @@ class DDRLWebInterface(dash.Dash):
                                 'font-size': HEADING_FONT_SIZE,
                             }
                         ),
-                        html.H2(
-                            children='Presented by Zhouyou Gu',
-                            style={
-                                'textAlign': 'center',
-                                'color': colors['title'],
-                                'font-size': SUBTITLE_FONT_SIZE,
-                            }
-                        ),
+                        # html.H2(
+                        #     children='Presented by Zhouyou Gu',
+                        #     style={
+                        #         'textAlign': 'center',
+                        #         'color': colors['title'],
+                        #         'font-size': SUBTITLE_FONT_SIZE,
+                        #     }
+                        # ),
                         # html.H1(
                         #     children='Paper: Knowledge-assisted Deep Reinforcement Learning in 5G Scheduler Design: From Theoretical Framework to Implementation',
                         #     style={
