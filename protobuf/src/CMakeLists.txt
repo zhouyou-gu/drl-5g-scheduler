@@ -10,12 +10,14 @@ protobuf_generate_cpp(PROTO_SRC PROTO_HEADER ${SOURCES})
 protobuf_generate_python(PROTP_PY_SRC ${SOURCES})
 message(PROTO_HEADER:${PROTO_HEADER})
 
-#add the target for generating python files
+#add the target for generating python and c files
 add_custom_target(proto_py_target ALL
 		DEPENDS ${PROTP_PY_SRC})
 
+add_custom_target(proto_c_target ALL
+		DEPENDS ${PROTO_HEADER})
+
 #add the library for protobuf
-add_library(proto ${PROTO_HEADER} ${PROTO_SRC})
 
 #add the target for python installation after compile
 foreach(f ${PROTP_PY_SRC})
@@ -30,23 +32,31 @@ foreach(f ${PROTP_PY_SRC})
 			copy ${f} ${PROTO_PY_DIR_TEST})
 endforeach()
 
-add_custom_command(TARGET proto POST_BUILD
+
+#########################################
+#add the target for c installation after compile
+
+add_library(proto ${PROTO_HEADER} ${PROTO_SRC})
+
+add_custom_command(TARGET proto_c_target POST_BUILD
 		COMMAND ${CMAKE_COMMAND} -E
 		copy $<TARGET_FILE_NAME:proto> ${PROTO_LIB_DIR}/$<TARGET_FILE_NAME:proto>)
 
 foreach(f ${PROTO_HEADER})
-	add_custom_command(TARGET proto POST_BUILD
+	add_custom_command(TARGET proto_c_target POST_BUILD
 			COMMAND ${CMAKE_COMMAND} -E
 			copy ${f} ${PROTO_LIB_DIR})
 endforeach()
 
-###(Not in use): install the header files and library in a directory
-#add_custom_command(TARGET proto POST_BUILD
-#		COMMAND ${CMAKE_COMMAND} -E
-#		copy $<TARGET_FILE_NAME:proto> ${PROTO_LIB_DIR_TEST}/$<TARGET_FILE_NAME:proto>)
-#
-#foreach(f ${PROTO_HEADER})
-#	add_custom_command(TARGET proto POST_BUILD
-#			COMMAND ${CMAKE_COMMAND} -E
-#			copy ${f} ${PROTO_LIB_DIR_TEST})
-#endforeach()
+
+add_custom_command(TARGET proto_c_target POST_BUILD
+		COMMAND ${CMAKE_COMMAND} -E
+		copy $<TARGET_FILE_NAME:proto> ${PROTO_LIB_DIR_TEST}/$<TARGET_FILE_NAME:proto>)
+
+foreach(f ${PROTO_HEADER})
+	add_custom_command(TARGET proto_c_target POST_BUILD
+			COMMAND ${CMAKE_COMMAND} -E
+			copy ${f} ${PROTO_LIB_DIR_TEST})
+endforeach()
+
+

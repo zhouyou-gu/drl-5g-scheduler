@@ -1,0 +1,25 @@
+#
+# .csv to store UE's information in HSS
+# Kept in the following format: "Name,Auth,IMSI,Key,OP_Type,OP,AMF,SQN,QCI,IP_alloc"
+#
+# Name:     Human readable name to help distinguish UE's. Ignored by the HSS
+# IMSI:     UE's IMSI value
+# Auth:     Authentication algorithm used by the UE. Valid algorithms are XOR
+#           (xor) and MILENAGE (mil)
+# Key:      UE's key, where other keys are derived from. Stored in hexadecimal
+# OP_Type:  Operator's code type, either OP or OPc
+# OP/OPc:   Operator Code/Cyphered Operator Code, stored in hexadecimal
+# AMF:      Authentication management field, stored in hexadecimal
+# SQN:      UE's Sequence number for freshness of the authentication
+# QCI:      QoS Class Identifier for the UE's default bearer.
+# IP_alloc: IP allocation stratagy for the SPGW.
+#           With 'dynamic' the SPGW will automatically allocate IPs
+#           With a valid IPv4 (e.g. '172.16.0.2') the UE will have a statically assigned IP.
+#
+# Note: Lines starting by '#' are ignored and will be overwritten
+ue1,mil,012345678900001,00112233445566778899aabbccddeeff,opc,63bfa50ee6523365ff14c1f45f88737d,9001,000000001234,7,172.16.0.101
+ue2,mil,012345678900002,00112233445566778899aabbccddeeff,opc,63bfa50ee6523365ff14c1f45f88737d,9001,000000001234,7,172.16.0.102
+ue3,mil,012345678900003,00112233445566778899aabbccddeeff,opc,63bfa50ee6523365ff14c1f45f88737d,9001,000000001234,7,172.16.0.103
+ue4,mil,012345678900004,00112233445566778899aabbccddeeff,opc,63bfa50ee6523365ff14c1f45f88737d,9001,000000001234,7,172.16.0.104
+ue5,mil,012345678900005,00112233445566778899aabbccddeeff,opc,63bfa50ee6523365ff14c1f45f88737d,9001,000000001234,7,172.16.0.105
+ue6,mil,012345678900006,00112233445566778899aabbccddeeff,opc,63bfa50ee6523365ff14c1f45f88737d,9001,000000001234,7,172.16.0.106

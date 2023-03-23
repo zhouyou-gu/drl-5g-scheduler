@@ -12,6 +12,6 @@ set(PROTO_HEADER_INCLUDE_DIR ${PROTO_HEADER_INCLUDE_DIR} PARENT_SCOPE)
 
 #set the test dir for the python genereted files
 set(PROTO_PY_DIR_TEST "${PROJECT_SOURCE_DIR}/test/proto_py" )
-#set(PROTO_LIB_DIR_TEST"${PROJECT_SOURCE_DIR}/test/proto_c" )
+set(PROTO_LIB_DIR_TEST "${PROJECT_SOURCE_DIR}/test/proto_c" )
 add_subdirectory(src)
 add_subdirectory(test)
