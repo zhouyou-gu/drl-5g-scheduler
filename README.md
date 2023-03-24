@@ -76,13 +76,7 @@ The reference setup of the equipment is shown in the following picture, where al
 ![setup](./controller_src/edge_ctrl_script/ctrl_web_interface/assets/ddrl.png)
 
 
-In the edge controller server, download a copy of this project. Then, fetch the srsLTE source code at commit `c4bcd6e287fc67bf85fb82a41d1f8f2c901ed8d5`  and place srsLTE source codes as `edge_src/srsLTE`. After that, switch the working directory to `edge_src` and apply the patch to srsLTE by running
-
-```shell
-python3 apply_srslte_patch.py
-```
-
-Also, download the libtorch (at the version listed in package dependency) in `edge_src` by running
+In the edge controller server, download the libtorch (at the version listed in package dependency) in `edge_src` by running
 
 ```shell
 python3 install_libtorch.py
