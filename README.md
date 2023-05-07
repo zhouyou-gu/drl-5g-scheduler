@@ -58,7 +58,7 @@ sudo pip3 install tensorboard paramiko matplotlib scipy future scp dash
 An example of off-line training script is shown in `controller_src/sim_sript_example/ka.py`.  To run this script, execute the following command under `controller_src`, 
 
 ```shell
-PYTHONPATH=./ python3 ./sim_sript_example/ka.py
+PYTHONPATH=./ python3 ./sim_script_example/ka.py
 ```
 
 The above script creates a logging folder as `controller_src/sim_sript_example/tb-data` (for details, please check `ka.py` and other related codes). To see the training information, run the follows under `controller_src/sim_sript_example/tb-data`,
