@@ -22,7 +22,7 @@ if __name__ == '__main__':
 #   “Knowledge-assisted deep reinforcement learning in 5G scheduler design:
 #  From theoretical framework to implementation,” IEEE JSAC., to appear, 2021
 
-a = hol_is_in_range(7, 4, 6)
+    a = hol_is_in_range(7, 4, 6)
     print(a)
 
     a = hol_flat_reward(2, 4, 60)
